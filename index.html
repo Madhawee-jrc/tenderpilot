@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TenderPilot — Win More Government Contracts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral:       #E8454A;
+      --coral-dark:  #C93438;
+      --coral-pale:  #FDEAEA;
+      --blue:        #3AABDE;
+      --blue-dark:   #2290C4;
+      --blue-pale:   #E8F4FB;
+      --sky-grad-1:  #2E9CDB;
+      --sky-grad-2:  #63C8F0;
+      --hero-bg:     #EAF3FB;
+      --white:       #FFFFFF;
+      --ink:         #1A1A2E;
+      --ink-2:       #2E3A5A;
+      --muted:       #6B7A99;
+      --border:      #DDE8F5;
+      --shadow-sm:   0 4px 16px rgba(58,171,222,0.12);
+      --shadow-md:   0 8px 32px rgba(58,171,222,0.18);
+      --shadow-lg:   0 20px 60px rgba(58,171,222,0.22);
+      --shadow-card: 0 6px 24px rgba(0,0,50,0.08);
+      --radius:      12px;
+      --radius-lg:   20px;
+      --radius-xl:   32px;
+      --radius-pill: 100px;
+      --font: 'Poppins', system-ui, sans-serif;
+      --max: 1140px;
+      --nav-h: 64px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); background: var(--white); color: var(--ink); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 40px; }
+    section { padding: 80px 0; }
+
+    /* Blobs */
+    .blob { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+    .blob-coral { background: rgba(232,69,74,0.10); }
+    .blob-blue  { background: rgba(58,171,222,0.15); }
+
+    /* ── Buttons ── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font); font-size: 15px; font-weight: 600; padding: 14px 36px; border-radius: var(--radius-pill); cursor: pointer; text-decoration: none; border: none; transition: all 0.22s ease; white-space: nowrap; letter-spacing: 0.02em; text-transform: uppercase; }
+    .btn-coral { background: var(--coral); color: #fff; box-shadow: 0 8px 24px rgba(232,69,74,0.35); }
+    .btn-coral:hover { background: var(--coral-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(232,69,74,0.45); }
+    .btn-blue { background: var(--blue); color: #fff; box-shadow: 0 8px 24px rgba(58,171,222,0.35); }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: var(--coral); border: 2px solid var(--coral); }
+    .btn-outline:hover { background: var(--coral); color: #fff; }
+    .btn-white { background: var(--white); color: var(--coral); font-weight: 700; box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.18); }
+
+    /* ══════════════════════════
+       NAV
+    ══════════════════════════ */
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.95); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); height: var(--nav-h); transition: box-shadow 0.3s; }
+    nav.scrolled { box-shadow: 0 4px 20px rgba(0,0,50,0.08); }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 40px; height: 100%; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .logo-badge {
+      width: 38px; height: 38px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .logo-name { font-size: 18px; font-weight: 700; color: var(--ink); }
+    .logo-name span { color: var(--coral); }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 7px 16px; border-radius: var(--radius-pill); transition: all 0.18s; }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-pale); }
+    .nav-right { display: flex; align-items: center; gap: 12px; }
+    .nav-login { font-size: 14px; font-weight: 500; color: var(--muted); text-decoration: none; padding: 7px 16px; transition: color 0.18s; }
+    .nav-login:hover { color: var(--coral); }
+
+    /* ══════════════════════════
+       HERO
+    ══════════════════════════ */
+    .hero { background: var(--hero-bg); padding: 64px 0 0; min-height: calc(100vh - var(--nav-h)); display: flex; align-items: center; position: relative; overflow: hidden; }
+    /* decorative blobs */
+    .hero .blob-coral { width: 600px; height: 400px; left: -80px; }
+    .hero .blob-blue  { width: 600px; height: 400px; top: -100px; right: 200px; opacity: 0.6; }
+
+    .hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; position: relative; z-index: 1; padding-bottom: 64px; }
+
+    /* Left */
+    .hero-left {}
+    .hero-tag { display: inline-block; font-size: 12px; font-weight: 600; color: var(--coral); background: var(--coral-pale); border-radius: var(--radius-pill); padding: 5px 16px; margin-bottom: 18px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-left h1 { font-size: clamp(32px, 4.2vw, 52px); font-weight: 800; line-height: 1.15; color: var(--ink); margin-bottom: 18px; letter-spacing: -0.02em; }
+    .hero-left h1 .coral { color: var(--coral); }
+    .hero-left p { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 380px; margin-bottom: 32px; font-weight: 400; }
+    .hero-price-wrap { margin-bottom: 28px; }
+    .hero-price-label { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .hero-price { display: flex; align-items: baseline; gap: 12px; }
+    .hero-price-main { font-size: 40px; font-weight: 800; color: var(--blue); letter-spacing: -0.03em; line-height: 1; }
+    .hero-price-old { font-size: 18px; font-weight: 400; color: var(--muted); text-decoration: line-through; }
+
+    /* Hero stats strip */
+    .hero-actions { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 0; }
+    .hero-stats { display: flex; gap: 32px; margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+    .hero-stat-num { font-size: 28px; font-weight: 800; color: var(--ink); letter-spacing: -0.025em; line-height: 1; }
+    .hero-stat-num sup { font-size: 16px; color: var(--coral); }
+    .hero-stat-label { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+
+    /* ══════════════════════════
+       HERO RIGHT — World-class animated visual
+    ══════════════════════════ */
+    .hero-right { position: relative; display: flex; justify-content: center; align-items: center; }
+
+    .hero-visual-stage {
+      position: relative; width: 460px; height: 500px;
+    }
+
+    /* Pulsing background glow rings */
+    .hero-glow {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 360px; height: 360px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(58,171,222,0.12) 0%, transparent 70%);
+      animation: glow-pulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 460px; height: 460px; border-radius: 50%;
+      border: 1px solid rgba(58,171,222,0.1);
+      animation: ring-expand 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .hero-glow-3 {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 560px; height: 560px; border-radius: 50%;
+      border: 1px solid rgba(58,171,222,0.05);
+      animation: ring-expand 3s ease-in-out infinite 0.5s;
+      pointer-events: none;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.8; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%,-50%) scale(1.06); }
+    }
+    @keyframes ring-expand {
+      0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 0.3; transform: translate(-50%,-50%) scale(1.05); }
+    }
+
+    /* Main dashboard card */
+    .hero-dash-stage {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-42%, -50%);
+      width: 320px;
+      animation: float-main 5s ease-in-out infinite;
+      z-index: 3;
+    }
+    @keyframes float-main {
+      0%, 100% { transform: translate(-42%,-50%) translateY(0px); }
+      50%        { transform: translate(-42%,-50%) translateY(-10px); }
+    }
+
+    .hero-dash {
+      background: white; border-radius: 20px;
+      box-shadow: 0 24px 64px rgba(0,0,50,0.14);
+      overflow: hidden;
+    }
+    .hero-dash-header {
+      background: linear-gradient(135deg, var(--sky-grad-1), var(--sky-grad-2));
+      padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .hero-dash-title { font-size: 13px; font-weight: 700; color: white; }
+    .hero-dash-badge {
+      background: rgba(255,255,255,0.25); color: white;
+      font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: var(--radius-pill);
+    }
+    /* Live indicator dot */
+    .hero-dash-live {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.8);
+    }
+    .hero-dash-live-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #4ade80;
+      animation: live-blink 1.8s ease-in-out infinite;
+    }
+    @keyframes live-blink {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 4px rgba(74,222,128,0); }
+    }
+    .hero-dash-body { padding: 16px 20px; }
+    .hero-dash-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid #F0F4F8;
+    }
+    .hero-dash-row:last-of-type { border-bottom: none; }
+    .hero-dash-left { display: flex; align-items: center; gap: 10px; }
+    .hero-dash-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+    .hero-dash-dot.done { background: #4CAF50; }
+    .hero-dash-dot.new { background: #E0E0E0; }
+    /* Active row pulse */
+    .hero-dash-row.active { background: linear-gradient(90deg, rgba(58,171,222,0.06), transparent); border-radius: 8px; margin: 0 -8px; padding: 10px 8px; }
+    .hero-dash-label { font-size: 12px; font-weight: 600; color: var(--ink); }
+    .hero-dash-sub { font-size: 10px; color: var(--muted); }
+    .hero-dash-val { font-size: 12px; font-weight: 700; color: var(--blue); }
+    .hero-dash-val.done { color: #4CAF50; }
+    .hero-dash-val.new { color: #bbb; }
+    .hero-dash-prog { margin-top: 12px; }
+    .hero-dash-prog-label { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 11px; font-weight: 600; color: var(--muted); }
+    .hero-dash-prog-pct { color: var(--blue); }
+    .hero-dash-bar { height: 6px; background: #EEF2F8; border-radius: 3px; overflow: hidden; }
+    .hero-dash-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--sky-grad-2));
+      border-radius: 3px; width: 0%;
+      animation: bar-fill-in 1.8s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
+    }
+    @keyframes bar-fill-in { to { width: 77%; } }
+    .hero-dash-cta {
+      display: block; width: 100%; background: var(--coral); color: white;
+      border: none; border-radius: var(--radius); padding: 12px;
+      font-family: var(--font); font-size: 12px; font-weight: 700;
+      cursor: pointer; margin-top: 12px; letter-spacing: 0.04em;
+      text-transform: uppercase; transition: all 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .hero-dash-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+      transform: translateX(-100%);
+      animation: shimmer 2.8s ease-in-out infinite 2s;
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      40%, 100% { transform: translateX(100%); }
+    }
+    .hero-dash-cta:hover { background: var(--coral-dark); transform: scale(1.01); }
+
+    /* Floating chips */
+    .hero-chip {
+      position: absolute; background: white;
+      border-radius: 14px; box-shadow: 0 8px 28px rgba(0,0,50,0.10);
+      border: 1px solid var(--border); padding: 12px 16px;
+      display: flex; align-items: center; gap: 10px;
+      z-index: 5; white-space: nowrap;
+    }
+    .hero-chip-icon {
+      width: 32px; height: 32px; border-radius: 10px;
+      background: var(--blue-pale); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0; border: 1px solid var(--border);
+    }
+    .hero-chip-icon svg { width: 16px; height: 16px; }
+    .hero-chip strong { font-size: 12px; font-weight: 700; color: var(--ink); display: block; line-height: 1.2; }
+    .hero-chip span { font-size: 10px; color: var(--muted); }
+
+    /* Chip 1 — top right: AI Analysis complete */
+    .chip-1 {
+      top: 4%; right: -5%;
+      animation: chip-float-1 5s ease-in-out infinite;
+      animation-delay: 0.3s;
+    }
+    @keyframes chip-float-1 {
+      0%, 100% { transform: translateY(0px) rotate(-1deg); }
+      50% { transform: translateY(-9px) rotate(1deg); }
+    }
+
+    /* Chip 2 — left middle: Active user */
+    .chip-2 {
+      top: 36%; left: -8%;
+      animation: chip-float-2 6s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+    @keyframes chip-float-2 {
+      0%, 100% { transform: translateY(0px) rotate(1deg); }
+      50% { transform: translateY(-7px) rotate(-1deg); }
+    }
+
+    /* Chip 3 — bottom right: Contract won */
+    .chip-3 {
+      bottom: 16%; right: -8%;
+      animation: chip-float-3 5.5s ease-in-out infinite;
+      animation-delay: 0.7s;
+    }
+    @keyframes chip-float-3 {
+      0%, 100% { transform: translateY(0px) rotate(0.5deg); }
+      50% { transform: translateY(-8px) rotate(-0.5deg); }
+    }
+
+    /* Guarantee badge */
+    .guarantee-badge {
+      position: absolute; bottom: 10%; left: -2%;
+      width: 84px; height: 84px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--sky-grad-1), #88D8F0);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: white;
+      box-shadow: 0 8px 24px rgba(58,171,222,0.4); z-index: 6;
+      animation: badge-spin 14s linear infinite;
+    }
+    @keyframes badge-spin {
+      0%, 100% { transform: rotate(-4deg) scale(1); }
+      25% { transform: rotate(4deg) scale(1.04); }
+      50% { transform: rotate(-2deg) scale(1); }
+      75% { transform: rotate(3deg) scale(1.02); }
+    }
+    .guarantee-badge .num { font-size: 20px; font-weight: 800; line-height: 1; }
+    .guarantee-badge .label { font-size: 7px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.4; margin-top: 3px; }
+
+    /* ══════════════════════════
+       FEATURE CARDS ROW
+    ══════════════════════════ */
+    .features-strip { background: var(--hero-bg); padding: 0 0 60px; }
+    .features-strip-inner { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .feat-strip-card { background: white; border-radius: var(--radius-lg); padding: 32px 24px 28px; text-align: center; box-shadow: var(--shadow-card); transition: all 0.25s; border: 1px solid transparent; }
+    .feat-strip-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--blue-pale); }
+    .feat-strip-icon { font-size: 42px; margin-bottom: 16px; display: block; }
+    .feat-strip-card h3 { font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .feat-strip-card p { font-size: 13px; color: var(--muted); font-weight: 400; line-height: 1.5; }
+
+    /* SVG icon placeholder */
+    .icon-outline { width: 52px; height: 52px; margin: 0 auto 16px; }
+    .icon-outline svg { width: 100%; height: 100%; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ══════════════════════════
+       HOW IT WORKS — blue gradient
+    ══════════════════════════ */
+    .how-section { background: linear-gradient(160deg, var(--sky-grad-1) 0%, var(--sky-grad-2) 100%); padding: 80px 0; position: relative; overflow: hidden; }
+    .how-section .blob { filter: blur(80px); }
+    .how-blob-1 { width: 280px; height: 280px; background: rgba(232,69,74,0.15); bottom: -60px; left: -40px; }
+    .how-blob-2 { width: 320px; height: 320px; background: rgba(255,255,255,0.08); top: -80px; right: -60px; }
+    .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; position: relative; z-index: 1; }
+    .how-header { text-align: center; margin-bottom: 56px; }
+    .how-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: white; letter-spacing: -0.02em; }
+
+    /* Video placeholder */
+    .how-video { border-radius: var(--radius-xl); overflow: hidden; position: relative; box-shadow: 0 20px 60px rgba(0,0,0,0.25); }
+    .how-video-thumb { width: 100%; aspect-ratio: 16/11; background: linear-gradient(145deg, #1A2E4A, #2A4A6A); display: flex; align-items: center; justify-content: center; position: relative; }
+    .how-video-thumb img { width: 100%; height: 100%; object-fit: cover; }
+    .how-video-img-bg { position: absolute; inset: 0; background: linear-gradient(145deg, #1E3A5A 0%, #2E5A80 60%, #3A7090 100%); }
+    .how-video-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; }
+    .how-play { width: 64px; height: 64px; border-radius: 50%; background: var(--coral); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 28px rgba(232,69,74,0.5); cursor: pointer; transition: transform 0.2s; }
+    .how-play:hover { transform: scale(1.1); }
+    .how-play svg { width: 24px; height: 24px; fill: white; margin-left: 3px; }
+    .how-video-label { position: absolute; bottom: 16px; left: 20px; color: white; font-size: 14px; font-weight: 600; }
+    .how-video-dash { width: 100%; padding: 20px 24px; background: rgba(255,255,255,0.12); backdrop-filter: blur(8px); display: flex; gap: 16px; }
+    .how-dash-stat { text-align: center; flex: 1; }
+    .how-dash-stat .num { font-size: 24px; font-weight: 800; color: white; letter-spacing: -0.02em; }
+    .how-dash-stat .lbl { font-size: 11px; color: rgba(255,255,255,0.7); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* Steps */
+    .how-steps { display: flex; flex-direction: column; gap: 28px; }
+    .how-step { display: flex; align-items: flex-start; gap: 20px; }
+    .how-step-num { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.4); display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; color: white; flex-shrink: 0; }
+    .how-step-body h4 { font-size: 16px; font-weight: 600; color: white; margin-bottom: 4px; }
+    .how-step-body p { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.6; font-weight: 400; }
+
+    /* ══════════════════════════
+       WHO CAN BENEFIT
+    ══════════════════════════ */
+    .benefit-outer { background: linear-gradient(160deg, var(--sky-grad-1), var(--sky-grad-2)); padding: 20px 0 60px; }
+    .benefit-outer { background: linear-gradient(160deg, var(--sky-grad-1), var(--sky-grad-2)); padding: 20px 0 60px; }
+    .benefit-card { background: white; border-radius: 36px; padding: 64px 56px; box-shadow: 0 24px 80px rgba(0,0,50,0.12); margin: 0 auto; max-width: 1020px; position: relative; overflow: hidden; }
+    .benefit-card::before { content: ''; position: absolute; bottom: -80px; right: -80px; width: 280px; height: 280px; border-radius: 50%; background: var(--hero-bg); opacity: 0.6; }
+    .benefit-card-header { text-align: center; margin-bottom: 52px; }
+    .benefit-card-header h2 { font-size: clamp(24px, 3vw, 36px); font-weight: 800; color: var(--ink); letter-spacing: -0.025em; line-height: 1.2; }
+    .benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; position: relative; z-index: 1; }
+    .benefit-item { background: var(--hero-bg); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: 32px 28px; text-align: center; transition: all 0.25s; }
+    .benefit-item:hover { background: var(--white); border-color: var(--blue); transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .benefit-icon-wrap { width: 56px; height: 56px; margin: 0 auto 18px; background: var(--white); border-radius: 16px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; padding: 13px; transition: all 0.25s; }
+    .benefit-item:hover .benefit-icon-wrap { background: var(--blue-pale); border-color: var(--blue); }
+    .benefit-icon-wrap svg { width: 100%; height: 100%; }
+    .benefit-item h4 { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; line-height: 1.3; }
+    .benefit-item p { font-size: 13px; color: var(--muted); line-height: 1.5; font-weight: 400; }
+    .benefit-cta { text-align: center; margin-top: 48px; position: relative; z-index: 1; }
+
+    /* ══════════════════════════
+       PROBLEM
+    ══════════════════════════ */
+    .problem-bg { background: var(--white); }
+    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .problem-card { background: var(--hero-bg); border-radius: var(--radius-xl); padding: 36px 28px; border: 1px solid var(--border); transition: all 0.25s; position: relative; overflow: hidden; text-align: center; }
+    .problem-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .problem-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--coral); transform: scaleX(0); transform-origin: center; transition: transform 0.3s; }
+    .problem-card:hover::after { transform: scaleX(1); }
+    .problem-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .problem-card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .pc-stat { font-size: 42px; font-weight: 800; color: var(--coral); letter-spacing: -0.03em; margin-top: 18px; line-height: 1; }
+    .pc-stat small { font-size: 12px; font-family: var(--font); color: var(--muted); font-weight: 400; display: block; margin-top: 4px; }
+
+    /* ══════════════════════════
+       KNOWLEDGE MOAT
+    ══════════════════════════ */
+    .moat-bg { background: var(--hero-bg); }
+    .moat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .moat-visual { background: linear-gradient(135deg, var(--sky-grad-1), var(--sky-grad-2)); border-radius: var(--radius-xl); padding: 40px 36px; position: relative; overflow: hidden; box-shadow: var(--shadow-lg); }
+    .moat-visual::after { content: ''; position: absolute; bottom: -40px; right: -40px; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+    .moat-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+    .moat-visual h4 { font-size: 20px; font-weight: 800; color: white; margin-bottom: 6px; letter-spacing: -0.01em; }
+    .moat-visual > p { font-size: 13px; color: rgba(255,255,255,0.65); margin-bottom: 28px; }
+    .bar-row { margin-bottom: 16px; }
+    .bar-top { display: flex; justify-content: space-between; margin-bottom: 7px; }
+    .bar-name { font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.7); }
+    .bar-pct { font-size: 13px; font-weight: 700; color: white; }
+    .bar-track { height: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; overflow: hidden; }
+    .bar-fill { height: 100%; background: white; border-radius: 4px; transition: width 1.4s cubic-bezier(0.16,1,0.3,1); }
+    .moat-text { }
+    .moat-text h2 { font-size: clamp(26px,3.5vw,42px); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 14px; }
+    .moat-text h2 .coral { color: var(--coral); }
+    .moat-text > p { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+    .moat-points { display: flex; flex-direction: column; gap: 0; margin-top: 28px; }
+    .moat-pt { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .moat-pt:last-child { border-bottom: none; }
+    .moat-pt-icon { width: 40px; height: 40px; border-radius: 12px; background: var(--blue-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--border); }
+    .moat-pt h4 { font-size: 15px; font-weight: 700; margin-bottom: 3px; letter-spacing: -0.01em; }
+    .moat-pt p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ══════════════════════════
+       PRICING
+    ══════════════════════════ */
+    .pricing-bg { background: var(--white); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .price-card { background: var(--hero-bg); border: 2px solid var(--border); border-radius: var(--radius-xl); padding: 40px 32px; transition: all 0.25s; position: relative; text-align: center; }
+    .price-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--blue); }
+    .price-card.popular { background: linear-gradient(160deg, var(--sky-grad-1), var(--sky-grad-2)); border-color: transparent; color: white; }
+    .price-card.popular:hover { box-shadow: var(--shadow-lg); }
+    .pop-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--coral); color: white; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 18px; border-radius: var(--radius-pill); white-space: nowrap; box-shadow: 0 4px 14px rgba(232,69,74,0.4); }
+    .price-plan { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+    .price-card.popular .price-plan { color: rgba(255,255,255,0.65); }
+    .price-num { font-size: 56px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: var(--ink); }
+    .price-card.popular .price-num { color: white; }
+    .price-per { font-size: 14px; color: var(--muted); font-weight: 400; }
+    .price-card.popular .price-per { color: rgba(255,255,255,0.6); }
+    .price-desc { font-size: 14px; color: var(--muted); margin: 12px 0 24px; line-height: 1.6; }
+    .price-card.popular .price-desc { color: rgba(255,255,255,0.7); }
+    .price-div { height: 1px; background: var(--border); margin-bottom: 24px; }
+    .price-card.popular .price-div { background: rgba(255,255,255,0.25); }
+    .price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; text-align: left; }
+    .price-features li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--ink-2); }
+    .price-card.popular .price-features li { color: rgba(255,255,255,0.88); }
+    .pf-check { width: 20px; height: 20px; border-radius: 50%; background: var(--blue); display: flex; align-items: center; justify-content: center; font-size: 10px; color: white; flex-shrink: 0; }
+    .price-card.popular .pf-check { background: rgba(255,255,255,0.3); }
+    .price-note { font-size: 11px; color: var(--muted); margin-top: 12px; }
+    .price-card.popular .price-note { color: rgba(255,255,255,0.45); }
+
+    /* ══════════════════════════
+       TESTIMONIALS
+    ══════════════════════════ */
+    .testi-bg { background: var(--hero-bg); }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .testi-card { background: white; border-radius: var(--radius-xl); padding: 32px 28px; box-shadow: var(--shadow-card); transition: all 0.25s; border: 1px solid var(--border); }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .testi-stars { display: flex; gap: 4px; margin-bottom: 14px; align-items: center; }
+    .testi-card blockquote { font-size: 15px; line-height: 1.65; color: var(--ink-2); margin-bottom: 22px; font-weight: 400; font-style: italic; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--sky-grad-2)); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 800; color: white; flex-shrink: 0; }
+    .testi-name { font-size: 14px; font-weight: 700; }
+    .testi-role { font-size: 12px; color: var(--muted); }
+
+    /* ══════════════════════════
+       FAQ
+    ══════════════════════════ */
+    .faq-bg { background: var(--white); }
+    .faq-wrap { max-width: 720px; margin: 0 auto; }
+    .faq-item { background: var(--hero-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 10px; overflow: hidden; transition: all 0.2s; }
+    .faq-item.open { border-color: var(--blue); box-shadow: var(--shadow-sm); }
+    .faq-btn { width: 100%; background: none; border: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; gap: 16px; font-family: var(--font); font-size: 15px; font-weight: 600; color: var(--ink); text-align: left; }
+    .faq-icon { width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; background: white; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--muted); transition: all 0.22s; }
+    .faq-item.open .faq-icon { background: var(--blue); border-color: var(--blue); color: white; transform: rotate(45deg); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.35s cubic-bezier(0.16,1,0.3,1); }
+    .faq-item.open .faq-body { max-height: 280px; }
+    .faq-body p { padding: 0 24px 20px; font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+    /* ══════════════════════════
+       CTA SECTION
+    ══════════════════════════ */
+    .cta-outer { background: linear-gradient(160deg, var(--sky-grad-1), var(--sky-grad-2)); padding: 20px 0 60px; position: relative; overflow: hidden; }
+    .cta-outer .blob-coral { width: 300px; height: 300px; bottom: -60px; right: 100px; }
+    .cta-card { background: white; border-radius: 36px; padding: 64px 48px; text-align: center; max-width: 800px; margin: 0 auto; box-shadow: 0 24px 80px rgba(0,0,50,0.14); position: relative; z-index: 1; }
+    .cta-card h2 { font-size: clamp(28px,4vw,44px); font-weight: 800; color: var(--ink); letter-spacing: -0.025em; line-height: 1.15; margin-bottom: 14px; }
+    .cta-card h2 .coral { color: var(--coral); }
+    .cta-card p { font-size: 16px; color: var(--muted); max-width: 460px; margin: 0 auto 36px; line-height: 1.7; }
+    .cta-btns { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .cta-note { margin-top: 18px; font-size: 12px; color: var(--muted); letter-spacing: 0.03em; }
+
+    /* ══════════════════════════
+       FOOTER
+    ══════════════════════════ */
+    footer { background: var(--ink); padding: 64px 0 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 52px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); line-height: 1.75; margin-top: 14px; max-width: 220px; font-weight: 300; }
+    .footer-logo-name { font-size: 20px; font-weight: 700; color: white; }
+    .footer-logo-name span { color: var(--coral); }
+    .footer-col h5 { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 18px; }
+    .footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.5); text-decoration: none; margin-bottom: 10px; transition: color 0.18s; font-weight: 400; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.25); text-decoration: none; transition: color 0.18s; }
+    .footer-bottom-links a:hover { color: var(--coral); }
+
+    /* ══════════════════════════
+       SECTION HEADERS
+    ══════════════════════════ */
+    .section-tag { display: inline-block; font-size: 12px; font-weight: 600; color: var(--coral); background: var(--coral-pale); border-radius: var(--radius-pill); padding: 5px 16px; margin-bottom: 14px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .section-h2 { font-size: clamp(28px,3.8vw,44px); font-weight: 800; line-height: 1.15; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 14px; }
+    .section-h2 .coral { color: var(--coral); }
+    .section-h2 .blue { color: var(--blue); }
+    .section-sub { font-size: 16px; color: var(--muted); line-height: 1.7; max-width: 480px; font-weight: 400; }
+    .section-header { margin-bottom: 56px; }
+    .centered { text-align: center; }
+    .centered .section-sub { margin: 0 auto; }
+
+    /* ══════════════════════════
+       SCROLL ANIMATIONS
+    ══════════════════════════ */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; } .d4 { transition-delay: 0.4s; }
+
+    /* ══════════════════════════
+       RESPONSIVE
+    ══════════════════════════ */
+    @media (max-width: 1020px) {
+      .hero-inner, .moat-grid, .how-inner { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+    }
+    @media (max-width: 800px) {
+      .problem-grid, .pricing-grid, .testi-grid, .features-strip-inner, .benefit-grid { grid-template-columns: 1fr; }
+      .features-strip-inner { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links, .topbar-announce { display: none; }
+    }
+    @media (max-width: 560px) {
+      .container { padding: 0 20px; }
+      .features-strip-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .benefit-card { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-badge">
+          <svg width="36" height="37" viewBox="0 0 184 189" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0,189) scale(0.1,-0.1)" fill="#E8454A" stroke="none">
+              <path d="M1250 1723 c-21 -7 -40 -34 -40 -55 0 -10 16 -35 35 -56 19 -22 32 -42 28 -46 -3 -3 -201 -6 -438 -6 -350 0 -439 -3 -466 -14 -149 -62 -184 -255 -65 -364 56 -52 95 -62 235 -62 l113 0 34 -34 34 -34 0 -272 c0 -162 4 -288 11 -314 41 -163 253 -214 371 -89 55 57 58 78 58 382 0 302 -2 311 -54 311 -52 0 -55 -13 -58 -312 l-3 -276 -24 -26 c-48 -51 -135 -42 -172 18 -17 28 -19 55 -19 314 0 315 -1 319 -67 385 -51 52 -106 67 -240 67 -109 0 -114 1 -144 28 -59 53 -38 150 38 171 41 12 819 16 847 5 13 -5 10 -13 -19 -45 -38 -43 -44 -69 -19 -93 35 -35 58 -25 150 65 l82 79 79 0 c86 0 113 14 113 57 0 39 -31 53 -114 53 l-78 0 -88 85 c-49 47 -92 85 -97 84 -4 0 -15 -3 -23 -6z"/>
+            </g>
+          </svg>
+        </div>
+      <span class="logo-name">Tender<span>Pilot</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#how">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-login">Log in</a>
+      <a href="#pricing" class="btn btn-coral" style="padding:10px 24px;font-size:13px;">Get Started</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="blob blob-coral"></div>
+  <div class="blob blob-blue"></div>
+  <div class="container" style="width:100%;">
+    <div class="hero-inner">
+
+      <!-- LEFT -->
+      <div class="hero-left">
+        <div class="hero-tag reveal">For Australian SMBs</div>
+        <h1 class="reveal d1">
+          Win More<br/>
+          <span class="coral">Government</span><br/>
+          Contracts.
+        </h1>
+        <p class="reveal d2">Upload a tender PDF. Answer 10 questions. Get a compliant submission in under 15 minutes.</p>
+        <div class="hero-actions reveal d3">
+          <a href="#pricing" class="btn btn-coral">Start Free Trial</a>
+          <a href="#how" class="btn btn-outline">See How It Works</a>
+        </div>
+        <div class="hero-stats reveal d4">
+          <div>
+            <div class="hero-stat-num">$72B<sup>+</sup></div>
+            <div class="hero-stat-label">AU procurement yearly</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">&lt;15<span style="font-size:16px;font-weight:500"> min</span></div>
+            <div class="hero-stat-label">Per submission draft</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">$199</div>
+            <div class="hero-stat-label">Starting per month</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="hero-right reveal d1">
+        <div class="hero-visual-stage">
+
+          <!-- Ambient glow rings -->
+          <div class="hero-glow"></div>
+          <div class="hero-glow-2"></div>
+          <div class="hero-glow-3"></div>
+
+          <!-- Main dashboard card -->
+          <div class="hero-dash-stage">
+            <div class="hero-dash">
+              <div class="hero-dash-header">
+                <span class="hero-dash-title">TenderPilot</span>
+                <div class="hero-dash-live">
+                  <div class="hero-dash-live-dot"></div>
+                  Live
+                </div>
+                <span class="hero-dash-badge">3 Active</span>
+              </div>
+              <div class="hero-dash-body">
+                <div class="hero-dash-row active">
+                  <div class="hero-dash-left">
+                    <div class="hero-dash-dot"></div>
+                    <div>
+                      <div class="hero-dash-label">IT Services Panel</div>
+                      <div class="hero-dash-sub">AusTender · Due in 4 days</div>
+                    </div>
+                  </div>
+                  <div class="hero-dash-val">77%</div>
+                </div>
+                <div class="hero-dash-row">
+                  <div class="hero-dash-left">
+                    <div class="hero-dash-dot done"></div>
+                    <div>
+                      <div class="hero-dash-label">Council Landscaping</div>
+                      <div class="hero-dash-sub">Submitted ✓</div>
+                    </div>
+                  </div>
+                  <div class="hero-dash-val done">Done</div>
+                </div>
+                <div class="hero-dash-row">
+                  <div class="hero-dash-left">
+                    <div class="hero-dash-dot new"></div>
+                    <div>
+                      <div class="hero-dash-label">NDIS Support</div>
+                      <div class="hero-dash-sub">GETS · Due in 12 days</div>
+                    </div>
+                  </div>
+                  <div class="hero-dash-val new">New</div>
+                </div>
+                <div class="hero-dash-prog">
+                  <div class="hero-dash-prog-label">
+                    <span>IT Services Panel</span>
+                    <span class="hero-dash-prog-pct">77%</span>
+                  </div>
+                  <div class="hero-dash-bar"><div class="hero-dash-fill"></div></div>
+                </div>
+                <button class="hero-dash-cta">Continue Drafting →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chip 1 — AI Analysis -->
+          <div class="hero-chip chip-1">
+            <div class="hero-chip-icon">
+              <svg viewBox="0 0 16 16" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 8h2M12 8h2M8 2v2M8 12v2"/>
+                <rect x="4" y="4" width="8" height="8" rx="2"/>
+                <circle cx="8" cy="8" r="1.5" fill="var(--blue)"/>
+              </svg>
+            </div>
+            <div>
+              <strong>AI Analysing</strong>
+              <span>100-page PDF · 3 sec</span>
+            </div>
+          </div>
+
+          <!-- Chip 2 — Active now -->
+          <div class="hero-chip chip-2">
+            <div class="hero-chip-icon" style="background:rgba(74,222,128,0.1);border-color:rgba(74,222,128,0.3);">
+              <svg viewBox="0 0 16 16" fill="none" stroke="#22c55e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="8" cy="6" r="2.5"/>
+                <path d="M3 14c0-2.8 2.2-5 5-5s5 2.2 5 5"/>
+              </svg>
+            </div>
+            <div>
+              <strong>No experience needed</strong>
+              <span>10 questions only</span>
+            </div>
+          </div>
+
+          <!-- Chip 3 — Contract won -->
+          <div class="hero-chip chip-3">
+            <div class="hero-chip-icon" style="background:rgba(232,69,74,0.08);border-color:rgba(232,69,74,0.2);">
+              <svg viewBox="0 0 16 16" fill="none" stroke="var(--coral)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8 2l1.8 3.6L14 6.3l-3 2.9.7 4.1L8 11.4l-3.7 1.9.7-4.1-3-2.9 4.2-.7L8 2z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Contract Won</strong>
+              <span>$380K · Council</span>
+            </div>
+          </div>
+
+          <!-- 30 Day badge -->
+          <div class="guarantee-badge">
+            <div class="num">30</div>
+            <div class="label">Day Money<br/>Back</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE CARDS STRIP -->
+<div class="features-strip" id="features">
+  <div class="container">
+    <div class="features-strip-inner">
+      <div class="feat-strip-card reveal">
+        <div class="icon-outline">
+          <svg viewBox="0 0 48 48"><rect x="8" y="4" width="32" height="40" rx="4"/><line x1="16" y1="16" x2="32" y2="16"/><line x1="16" y1="24" x2="32" y2="24"/><line x1="16" y1="32" x2="24" y2="32"/><polyline points="28,30 32,34 40,26"/></svg>
+        </div>
+        <h3>AI Tender Drafting</h3>
+        <p>maps capabilities to evaluation criteria</p>
+      </div>
+      <div class="feat-strip-card reveal d1">
+        <div class="icon-outline">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18"/><path d="M24 14 L24 24 L30 30"/><line x1="14" y1="6" x2="34" y2="6"/></svg>
+        </div>
+        <h3>15-Minute Turnaround</h3>
+        <p>draft ready in under 15 minutes</p>
+      </div>
+      <div class="feat-strip-card reveal d2">
+        <div class="icon-outline">
+          <svg viewBox="0 0 48 48"><path d="M8 40 L8 16 L24 4 L40 16 L40 40 Z"/><rect x="18" y="28" width="12" height="12"/><circle cx="24" cy="18" r="5"/></svg>
+        </div>
+        <h3>Compliance Detection</h3>
+        <p>flags missing requirements automatically</p>
+      </div>
+      <div class="feat-strip-card reveal d3">
+        <div class="icon-outline">
+          <svg viewBox="0 0 48 48"><ellipse cx="24" cy="24" rx="18" ry="12"/><path d="M6 24 Q14 36 24 36 Q34 36 42 24"/><line x1="24" y1="12" x2="24" y2="36"/></svg>
+        </div>
+        <h3>All Portal Support</h3>
+        <p>AusTender, GETS, VendorPanel & more</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS — blue gradient -->
+<section class="how-section" id="how">
+  <div class="blob blob how-blob-1"></div>
+  <div class="blob blob how-blob-2"></div>
+  <div class="container">
+    <div class="how-header reveal">
+      <h2>This is how easy it is to use TenderPilot</h2>
+    </div>
+    <div class="how-inner">
+      <!-- Video placeholder -->
+      <div class="reveal">
+        <div class="how-video">
+          <div class="how-video-thumb">
+            <div class="how-video-img-bg"></div>
+            <!-- SVG illustration of person at desk -->
+            <svg viewBox="0 0 480 330" style="width:100%;height:100%;position:absolute;inset:0;" fill="none">
+              <rect width="480" height="330" fill="url(#vid_bg)"/>
+              <!-- desk -->
+              <rect x="80" y="220" width="320" height="14" rx="4" fill="rgba(255,255,255,0.15)"/>
+              <!-- laptop -->
+              <rect x="140" y="150" width="200" height="130" rx="8" fill="rgba(30,60,100,0.8)"/>
+              <rect x="148" y="158" width="184" height="110" rx="4" fill="#0A1828"/>
+              <!-- screen content -->
+              <rect x="158" y="168" width="80" height="6" rx="3" fill="rgba(58,171,222,0.7)"/>
+              <rect x="158" y="180" width="60" height="4" rx="2" fill="rgba(255,255,255,0.2)"/>
+              <polyline points="158,215 175,200 195,208 215,192 235,198 255,182 275,188 295,175 315,180" stroke="#C2FF4D" stroke-width="2.5" fill="none" opacity="0.9" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- person silhouette -->
+              <ellipse cx="240" cy="130" rx="35" ry="40" fill="rgba(200,160,120,0.9)"/>
+              <path d="M180 220 Q195 160 240 155 Q285 160 300 220 Q270 240 240 242 Q210 240 180 220Z" fill="rgba(50,80,140,0.85)"/>
+              <!-- hair -->
+              <path d="M208 115 Q220 95 240 92 Q260 95 272 115 Q265 100 240 98 Q215 100 208 115Z" fill="rgba(40,20,10,0.9)"/>
+              <!-- smile -->
+              <path d="M228 138 Q240 148 252 138" stroke="rgba(80,40,20,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- arm -->
+              <path d="M200 190 Q210 210 230 215" stroke="rgba(200,160,120,0.7)" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <path d="M280 190 Q270 210 255 215" stroke="rgba(200,160,120,0.7)" stroke-width="12" fill="none" stroke-linecap="round"/>
+              <defs>
+                <linearGradient id="vid_bg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#1E3A5A"/>
+                  <stop offset="100%" stop-color="#2E5A80"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div class="how-video-overlay">
+              <div class="how-play">
+                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="how-video-dash">
+            <div class="how-dash-stat"><div class="num">580K</div><div class="lbl">Eligible SMBs</div></div>
+            <div class="how-dash-stat"><div class="num">$72B</div><div class="lbl">AU Procurement</div></div>
+            <div class="how-dash-stat"><div class="num">15min</div><div class="lbl">Avg Draft Time</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <div class="how-steps reveal d1">
+        <div class="how-step">
+          <div class="how-step-num">1</div>
+          <div class="how-step-body">
+            <h4>Upload the tender PDF</h4>
+            <p>Drop in any RFT or RFP document. TenderPilot reads every page, extracts evaluation criteria, compliance requirements, and mandatory attachments instantly.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">2</div>
+          <div class="how-step-body">
+            <h4>Answer 10 questions about your business</h4>
+            <p>Tell TenderPilot about your capabilities, past projects, and key staff. Your knowledge base grows smarter with every submission you complete.</p>
+          </div>
+        </div>
+        <div class="how-step">
+          <div class="how-step-num">3</div>
+          <div class="how-step-body">
+            <h4>Review, export and submit</h4>
+            <p>Review your AI-drafted, compliance-checked submission. Edit any section with one click. Export to Word and submit — done in under 15 minutes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO CAN BENEFIT -->
+<div class="benefit-outer">
+  <div class="container">
+    <div class="benefit-card reveal">
+
+      <div class="benefit-card-header">
+        <div class="section-tag" style="display:inline-block;margin-bottom:14px;">Who It's For</div>
+        <h2>Built for every business<br/>that works with government.</h2>
+      </div>
+
+      <div class="benefit-grid">
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 22V10l8-6 8 6v12"/>
+              <path d="M10 22v-6h8v6"/>
+              <path d="M6 22h16"/>
+              <line x1="14" y1="4" x2="14" y2="7"/>
+            </svg>
+          </div>
+          <h4>Construction &amp; Trades</h4>
+          <p>Local government contracts at scale</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="6" width="20" height="14" rx="2"/>
+              <path d="M10 24h8M14 20v4"/>
+              <path d="M8 11h4M8 14h8M8 17h5"/>
+              <circle cx="20" cy="12" r="2.5"/>
+              <path d="M20 14.5v1.5"/>
+            </svg>
+          </div>
+          <h4>IT &amp; Software</h4>
+          <p>Government digital transformation panels</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 4C9.6 4 6 7.6 6 12c0 3 1.6 5.7 4 7.2V21h8v-1.8c2.4-1.5 4-4.2 4-7.2 0-4.4-3.6-8-8-8z"/>
+              <path d="M10 21h8M11 24h6"/>
+              <path d="M11 12l2 2 4-4"/>
+            </svg>
+          </div>
+          <h4>Healthcare &amp; NDIS</h4>
+          <p>Complex compliance handled automatically</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="4" width="13" height="18" rx="2"/>
+              <line x1="8" y1="9" x2="15" y2="9"/>
+              <line x1="8" y1="12" x2="15" y2="12"/>
+              <line x1="8" y1="15" x2="12" y2="15"/>
+              <polyline points="18,17 22,17 22,23 18,23"/>
+              <line x1="20" y1="17" x2="20" y2="23"/>
+            </svg>
+          </div>
+          <h4>Professional Services</h4>
+          <p>Expand into government revenue streams</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="5" width="22" height="18" rx="2"/>
+              <path d="M3 10h22"/>
+              <path d="M8 15h4M8 18h6"/>
+              <circle cx="20" cy="16.5" r="3"/>
+              <path d="M22.5 19l2 2"/>
+            </svg>
+          </div>
+          <h4>Facilities Management</h4>
+          <p>High-volume local government contracts</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon-wrap">
+            <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="10" cy="9" r="3.5"/>
+              <circle cx="20" cy="9" r="3.5"/>
+              <path d="M3 23c0-3.9 3.1-7 7-7"/>
+              <path d="M25 23c0-3.9-3.1-7-7-7"/>
+              <path d="M10 16c1.1-.6 2.5-1 4-1s2.9.4 4 1c2.2 1.3 3.8 3.7 4 6.4H6c.2-2.7 1.8-5.1 4-6.4z"/>
+            </svg>
+          </div>
+          <h4>Tender Consultants</h4>
+          <p>Take on 3× the client load effortlessly</p>
+        </div>
+
+      </div>
+
+      <div class="benefit-cta">
+        <a href="#pricing" class="btn btn-coral">Start Free Trial</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-bg">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-tag">The Problem</div>
+      <h2 class="section-h2">Government tenders lock <span class="coral">97%</span> of SMBs out.</h2>
+      <p class="section-sub">The process was designed for large enterprises — not the 97% of Australian businesses that are SMBs.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card reveal">
+        <div class="pc-icon-wrap" style="width:56px;height:56px;margin:0 auto 22px;background:var(--white);border-radius:16px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:13px;">
+          <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;">
+            <circle cx="14" cy="14" r="10"/>
+            <path d="M14 8v6l3.5 3.5"/>
+            <path d="M8 4.5l-2-2M20 4.5l2-2"/>
+          </svg>
+        </div>
+        <h3>Crushing Time Cost</h3>
+        <p>A single federal RFP can run to 100 pages. Responding properly takes weeks of specialist effort most SMB teams can't spare.</p>
+        <div class="pc-stat">80–120<small>hours per tender response</small></div>
+      </div>
+      <div class="problem-card reveal d1">
+        <div class="pc-icon-wrap" style="width:56px;height:56px;margin:0 auto 22px;background:var(--white);border-radius:16px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:13px;">
+          <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;">
+            <rect x="4" y="8" width="20" height="14" rx="2"/>
+            <path d="M4 12h20"/>
+            <circle cx="9" cy="17" r="1.5"/>
+            <line x1="13" y1="17" x2="20" y2="17"/>
+            <line x1="13" y1="20" x2="17" y2="20"/>
+            <path d="M10 8V6a4 4 0 0 1 8 0v2"/>
+          </svg>
+        </div>
+        <h3>Expensive Consultants</h3>
+        <p>Dedicated tender writers charge $150–250/hr with 4–8 weeks lead time. The cost of responding often exceeds the expected margin.</p>
+        <div class="pc-stat">$250<small>/hr specialist writer rate</small></div>
+      </div>
+      <div class="problem-card reveal d2">
+        <div class="pc-icon-wrap" style="width:56px;height:56px;margin:0 auto 22px;background:var(--white);border-radius:16px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:13px;">
+          <svg viewBox="0 0 28 28" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:100%;height:100%;">
+            <line x1="2" y1="24" x2="26" y2="24"/>
+            <line x1="4" y1="24" x2="4" y2="14"/>
+            <line x1="24" y1="24" x2="24" y2="14"/>
+            <path d="M4 14h20"/>
+            <rect x="7" y="17" width="4" height="7"/>
+            <rect x="17" y="17" width="4" height="7"/>
+            <path d="M8 14V9h12v5"/>
+            <path d="M12 9V6h4v3"/>
+            <path d="M6 9h16"/>
+          </svg>
+        </div>
+        <h3>Incumbent Lock-In</h3>
+        <p>Billions in contracts go to the same large players year after year — not because they're more capable, but better resourced to respond.</p>
+        <div class="pc-stat">97%<small>of AU businesses locked out</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- KNOWLEDGE MOAT -->
+<section class="moat-bg">
+  <div class="container">
+    <div class="moat-grid">
+      <div class="moat-visual reveal">
+        <div class="moat-tag">Compounding Advantage</div>
+        <h4>Knowledge base accuracy grows with every submission</h4>
+        <p>TenderPilot learns your company's voice, projects, and differentiators over time</p>
+        <div class="bar-row"><div class="bar-top"><span class="bar-name">Submission 1</span><span class="bar-pct">35%</span></div><div class="bar-track"><div class="bar-fill" style="width:35%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-name">Submission 3</span><span class="bar-pct">62%</span></div><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-name">Submission 5</span><span class="bar-pct">80%</span></div><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div></div>
+        <div class="bar-row"><div class="bar-top"><span class="bar-name">Submission 10</span><span class="bar-pct">94%</span></div><div class="bar-track"><div class="bar-fill" style="width:94%"></div></div></div>
+      </div>
+      <div class="moat-text reveal d1">
+        <div class="section-tag">The Knowledge Moat</div>
+        <h2 class="section-h2">Gets smarter with every <span class="coral">submission.</span></h2>
+        <p>Generic AI tools start from scratch every time. TenderPilot builds a permanent, growing knowledge base — your projects, your language, your differentiators.</p>
+        <p>After 3–5 submissions, TenderPilot knows your business better than any consultant. After 10, it's irreplaceable.</p>
+        <div class="moat-points">
+          <div class="moat-pt">
+            <div class="moat-pt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                <circle cx="12" cy="16" r="1.5" fill="var(--blue)"/>
+              </svg>
+            </div>
+            <div><h4>Genuine lock-in</h4><p>Switching means losing months of accumulated context. Most customers simply don't switch.</p></div>
+          </div>
+          <div class="moat-pt">
+            <div class="moat-pt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+                <polyline points="22,7 13,16 9,12 2,18"/>
+                <polyline points="16,7 22,7 22,13"/>
+              </svg>
+            </div>
+            <div><h4>Improving win rate</h4><p>More context = more precise capability-to-criteria matching = higher-scoring responses.</p></div>
+          </div>
+          <div class="moat-pt">
+            <div class="moat-pt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+            <div><h4>Faster every time</h4><p>Standard sections auto-populate by your fifth submission. The time saving compounds.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-bg" id="pricing">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-tag">Pricing</div>
+      <h2 class="section-h2">Priced against the value of <span class="coral">one contract.</span></h2>
+      <p class="section-sub">Winning one additional $200K government contract makes TenderPilot's annual subscription look like a rounding error.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card reveal">
+        <div class="price-plan">Solo</div>
+        <div class="price-num">$199</div>
+        <span class="price-per">/month</span>
+        <p class="price-desc">For sole traders responding to 1–3 tenders per month.</p>
+        <div class="price-div"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span>3 submissions/month</li>
+          <li><span class="pf-check">✓</span>1 user</li>
+          <li><span class="pf-check">✓</span>Full AI drafting engine</li>
+          <li><span class="pf-check">✓</span>Company knowledge base</li>
+          <li><span class="pf-check">✓</span>Word (.docx) export</li>
+          <li><span class="pf-check">✓</span>Compliance checklist</li>
+        </ul>
+        <a href="#" class="btn btn-outline" style="width:100%;justify-content:center;">Get Started</a>
+        <p class="price-note">+$39 per additional submission</p>
+      </div>
+      <div class="price-card popular reveal d1">
+        <div class="pop-badge">Most Popular</div>
+        <div class="price-plan">Team</div>
+        <div class="price-num">$349</div>
+        <span class="price-per">/month</span>
+        <p class="price-desc">For growing businesses with a dedicated BD function.</p>
+        <div class="price-div"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span>8 submissions/month</li>
+          <li><span class="pf-check">✓</span>Up to 5 users</li>
+          <li><span class="pf-check">✓</span>Everything in Solo</li>
+          <li><span class="pf-check">✓</span>Team collaboration</li>
+          <li><span class="pf-check">✓</span>Multiple company profiles</li>
+          <li><span class="pf-check">✓</span>Priority support</li>
+        </ul>
+        <a href="#" class="btn btn-white" style="width:100%;justify-content:center;">Get Started</a>
+        <p class="price-note">+$39 per additional submission</p>
+      </div>
+      <div class="price-card reveal d2">
+        <div class="price-plan">Agency</div>
+        <div class="price-num">$499</div>
+        <span class="price-per">/month</span>
+        <p class="price-desc">For agencies managing submissions across multiple clients.</p>
+        <div class="price-div"></div>
+        <ul class="price-features">
+          <li><span class="pf-check">✓</span>20 submissions/month</li>
+          <li><span class="pf-check">✓</span>Up to 15 users</li>
+          <li><span class="pf-check">✓</span>Everything in Team</li>
+          <li><span class="pf-check">✓</span>Unlimited company profiles</li>
+          <li><span class="pf-check">✓</span>White-label export</li>
+          <li><span class="pf-check">✓</span>API access</li>
+        </ul>
+        <a href="#" class="btn btn-blue" style="width:100%;justify-content:center;">Get Started</a>
+        <p class="price-note">Enterprise from $999/mo</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-bg">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-tag">Client Results</div>
+      <h2 class="section-h2">What our clients are <span class="coral">saying.</span></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+        </div>
+        <blockquote>"We won a $380K council contract on our first TenderPilot submission. It framed our capabilities perfectly against the evaluation criteria."</blockquote>
+        <div class="testi-author"><div class="testi-avatar">J</div><div><div class="testi-name">James Hartley</div><div class="testi-role">Director · Hartley Civil Contracting</div></div></div>
+      </div>
+      <div class="testi-card reveal d1">
+        <div class="testi-stars">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+        </div>
+        <blockquote>"We used to turn down tenders due to time constraints. Now we respond to everything in our pipeline. Completely transformed our BD."</blockquote>
+        <div class="testi-author"><div class="testi-avatar">S</div><div><div class="testi-name">Sarah Nguyen</div><div class="testi-role">MD · Clearpoint IT Solutions</div></div></div>
+      </div>
+      <div class="testi-card reveal d2">
+        <div class="testi-stars">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="#F59E0B" stroke="#F59E0B" stroke-width="1"><polygon points="12,2 15.1,8.3 22,9.3 17,14.1 18.2,21 12,17.8 5.8,21 7,14.1 2,9.3 8.9,8.3"/></svg>
+        </div>
+        <blockquote>"TenderPilot lets me take on 3× the client load as a consultant. Each client's submissions improve over time — automatically."</blockquote>
+        <div class="testi-author"><div class="testi-avatar">M</div><div><div class="testi-name">Michelle Park</div><div class="testi-role">Principal · Park Tender Advisory</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-bg" id="faq">
+  <div class="container">
+    <div class="section-header centered reveal">
+      <div class="section-tag">FAQ</div>
+      <h2 class="section-h2">Common <span class="coral">questions</span> answered.</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item"><button class="faq-btn">Is the AI content good enough to actually win tenders?<span class="faq-icon">+</span></button><div class="faq-body"><p>TenderPilot is an AI-assisted drafting tool — it handles structure, compliance mapping, and language, but you always review the final submission. Quality improves with every submission as the knowledge base learns your company's voice and differentiators.</p></div></div>
+      <div class="faq-item"><button class="faq-btn">How does TenderPilot handle data confidentiality?<span class="faq-icon">+</span></button><div class="faq-body"><p>Your documents are processed solely to generate your responses and are never used for model training or shared with third parties. All data is stored in Australian data centres. Enterprise customers can request additional DPAs and SOC 2 documentation.</p></div></div>
+      <div class="faq-item"><button class="faq-btn">Which portals and tender formats are supported?<span class="faq-icon">+</span></button><div class="faq-body"><p>TenderPilot supports any PDF-format tender from any portal — AusTender, GETS (NSW), VendorPanel, VGPB, ProcurePoint, and all local government portals. The Tender Finder integrates directly with AusTender's API for automatic discovery.</p></div></div>
+      <div class="faq-item"><button class="faq-btn">Do I need tender writing experience to use TenderPilot?<span class="faq-icon">+</span></button><div class="faq-body"><p>No. TenderPilot is built for business owners, BD managers, and ops teams who know their business but aren't procurement specialists. The platform handles compliance frameworks, response structure, and language.</p></div></div>
+      <div class="faq-item"><button class="faq-btn">Is there a free trial available?<span class="faq-icon">+</span></button><div class="faq-body"><p>Yes — all new accounts include one free submission, no credit card required. Beta users receive 60 days of free access in exchange for fortnightly feedback sessions.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-outer">
+  <div class="blob blob-coral"></div>
+  <div class="container">
+    <div class="cta-card reveal">
+      <h2>Your next <span class="coral">contract</span> starts with one upload.</h2>
+      <p>Join Australian SMBs turning tender complexity into competitive advantage. First submission free, no credit card required.</p>
+      <div class="cta-btns">
+        <a href="#pricing" class="btn btn-coral">Start Free Trial</a>
+        <a href="#how" class="btn btn-outline">See How It Works</a>
+      </div>
+      <p class="cta-note">No credit card · Australian data residency · Cancel anytime</p>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
+          <svg width="36" height="37" viewBox="0 0 184 189" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0,189) scale(0.1,-0.1)" fill="#E8454A" stroke="none">
+              <path d="M1250 1723 c-21 -7 -40 -34 -40 -55 0 -10 16 -35 35 -56 19 -22 32 -42 28 -46 -3 -3 -201 -6 -438 -6 -350 0 -439 -3 -466 -14 -149 -62 -184 -255 -65 -364 56 -52 95 -62 235 -62 l113 0 34 -34 34 -34 0 -272 c0 -162 4 -288 11 -314 41 -163 253 -214 371 -89 55 57 58 78 58 382 0 302 -2 311 -54 311 -52 0 -55 -13 -58 -312 l-3 -276 -24 -26 c-48 -51 -135 -42 -172 18 -17 28 -19 55 -19 314 0 315 -1 319 -67 385 -51 52 -106 67 -240 67 -109 0 -114 1 -144 28 -59 53 -38 150 38 171 41 12 819 16 847 5 13 -5 10 -13 -19 -45 -38 -43 -44 -69 -19 -93 35 -35 58 -25 150 65 l82 79 79 0 c86 0 113 14 113 57 0 39 -31 53 -114 53 l-78 0 -88 85 c-49 47 -92 85 -97 84 -4 0 -15 -3 -23 -6z"/>
+            </g>
+          </svg>
+          <div class="footer-logo-name">Tender<span>Pilot</span></div>
+        </div>
+        <p>AI-powered government tender writing for Australian SMBs. Win more contracts in less time.</p>
+      </div>
+      <div class="footer-col"><h5>Product</h5><a href="#">Features</a><a href="#">Pricing</a><a href="#">Tender Finder</a><a href="#">Knowledge Base</a><a href="#">Integrations</a></div>
+      <div class="footer-col"><h5>Company</h5><a href="#">About</a><a href="#">Blog</a><a href="#">Careers</a><a href="#">Contact</a><a href="#">Press</a></div>
+      <div class="footer-col"><h5>Resources</h5><a href="#">Tender Writing Guide</a><a href="#">AusTender Explained</a><a href="#">Case Studies</a><a href="#">Help Centre</a></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TenderPilot Pty Ltd · ABN XX XXX XXX XXX</p>
+      <div class="footer-bottom-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Data Processing</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20));
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), i * 120);
+  });
+
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const open = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!open) item.classList.add('open');
+    });
+  });
+
+  const moatObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.bar-fill').forEach(b => {
+          const w = b.style.width; b.style.width = '0%';
+          requestAnimationFrame(() => setTimeout(() => b.style.width = w, 80));
+        });
+        moatObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const mv = document.querySelector('.moat-visual');
+  if (mv) moatObs.observe(mv);
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
